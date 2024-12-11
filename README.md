@@ -1,17 +1,3 @@
-# g1mercado-backend
-Backend for 3R7-G1's "The Mercado" Software
-
-### 3R7 Group 1 "The Mercado"
-
-Members:
-- Meljonh C. Asoy
-- Mariel Regine C. Endab
-- Harold Louis Mehila
-- Dave Lester Ramos
-- Joshua C. Felisilda
-- Mikedynl Ganinay
-
-
 # Node.js Backend Server with MySQL
 
 This is a simple Node.js backend server that uses MySQL for database operations, built with Express.js and supporting user authentication via JWTs.
@@ -141,15 +127,3 @@ Protected routes are accessible under `/api/protected` and require a valid JWT t
     ```
 
 - **Debugging**: Check the terminal for any errors or logs.
-
----
-
-## Contribution
-
-Feel free to fork and contribute to this project!
-
----
-
-## License
-
-This project is licensed under the MIT License.
