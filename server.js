@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -7,6 +8,7 @@ const protectedRoutes = require('./routes/protectedRoutes');
 require('dotenv').config();
 
 const app = express();
+app.use(cors());
 const PORT = 3000;
 
 // Middleware
@@ -36,8 +38,8 @@ app.get('/', (req, res) => {
 app.use('/api/protected', protectedRoutes); // Add the protected routes under /api/protected
 
 // Signup Route
-app.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body;
+app.post('/register', async (req, res) => {
+  const { firstname, lastname, email, password } = req.body;
 
   try {
       // Check if user already exists
@@ -50,8 +52,10 @@ app.post('/signup', async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       // Insert user into database
-      await db.promise().query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [
-          username,
+      await db.promise().query('INSERT INTO users (role, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)', [
+          "admin",
+          firstname, 
+          lastname, 
           email,
           hashedPassword,
       ]);
@@ -59,7 +63,7 @@ app.post('/signup', async (req, res) => {
       res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Internal server error: Signup' });
+      res.status(500).json({ message: 'Internal server error: Registration' });
   }
 });
 
